@@ -1,18 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { useDispatch, useSelector } from "react-redux";
-import Typography from '@material-ui/core/Typography';
+import { useDispatch } from "react-redux";
 import { red } from '@material-ui/core/colors';
-import { CardMedia, Grid } from '@material-ui/core';
-import { RootState } from '../../../store';
+import { CardMedia, Typography, CardContent, Card } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: 300,
-      marginBottom:20
+      marginBottom: 20
     },
     media: {
       height: 0,
@@ -35,11 +31,30 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "42px"
     },
     addCart: {
-      width:'100%',
+      width: '100%',
       "&:hover": {
         background: "#ba4a04",
         font: "#FFF"
       },
+    },
+    sale :{
+      backgroundColor: '#bd4006',
+      color : '#FFF',
+      maxWidth:'auto',
+      textAlign:'left',
+      padding:5,
+    },
+    exclusive : {
+      backgroundColor: '#3e6e04',
+      color : '#FFF',
+      maxWidth:'auto',
+      textAlign:'left',
+      padding:5,
+
+    },
+    statusContainer : {
+      textAlign:'left',
+      marginBottom:10
     }
   }));
 
@@ -59,13 +74,18 @@ export default function ItemCard(props: any) {
     <Card className={classes.root}>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={item.productName}
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        image={`/images/items/${item.productImage.jpg}`}
       />
       <CardContent>
+      <div className={classes.statusContainer}> 
+        {item.isExclusive && (<span className={classes.exclusive}>Exclusive</span>)}
+        {item.isSale && (<span className={classes.sale}>Sale</span>)}
+        {!item.isSale && !item.isExclusive && <br/>}
+        </div>
         <Typography variant="body2" color="textSecondary" component="p">
-          <span style={{ float: 'left', fontWeight:700 }}>{item.productName}</span>  <span style={{ float: 'right' }}><b>{item.price}</b></span>
+          <span style={{ float: 'left', fontWeight: 700 }}>{item.productName}</span>  <span style={{ float: 'right' }}><b>{item.price}</b></span>
         </Typography>
       </CardContent>
     </Card>

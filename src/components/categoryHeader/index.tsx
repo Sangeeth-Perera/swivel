@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {  FormControl, FormControlLabel, Grid,  MenuItem, Select } from '@material-ui/core';
+import {  FormControl, Grid,  MenuItem, Select } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,8 +34,7 @@ function CategoriesHeader(props: any) {
                     {heading}
                 </Typography>
             </Grid>
-            <Grid item xs={3}></Grid>
-            <Grid item xs={3}>
+            <Grid item xs={6}>
                 <FormControl className={classes.formControl}>
                     <Select
                         labelId="item-type"
