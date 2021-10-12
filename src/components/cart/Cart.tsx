@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import CartItem from "./CartItem";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, IconButton, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { CloseOutlined } from "@material-ui/icons";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,15 +24,15 @@ const useStyles = makeStyles((theme: Theme) =>
             overflow: "scroll",
 
         },
-        title : {
-            fontSize:"32px",
+        title: {
+            fontSize: "32px",
             padding: "20px 20px 20px 20px",
         },
-        checkOut : {
-            color : "#FFFF",
-            marginTop:"100px",
-            alignSelf:"center",
-            backgroundColor : "#ba4a04",
+        checkOut: {
+            color: "#FFFF",
+            marginTop: "100px",
+            alignSelf: "center",
+            backgroundColor: "#ba4a04",
         },
         modalPaper: {
             position: "absolute",
@@ -70,9 +71,9 @@ const useStyles = makeStyles((theme: Theme) =>
                 left: "0",
             },
         },
-        
+
     }),
-    
+
 );
 
 
@@ -91,30 +92,34 @@ export default function Cart(props: any) {
     const body = (
         <div className={classes.modalPaper}>
             <Grid container>
-                <Grid item lg={12} sm={12}>
-                    <Typography className = {classes.title}>Cart Information</Typography>
+                <Grid item lg={2} sm={2}>
+                    <IconButton color = 'inherit' onClick={handleClose}><CloseOutlined/></IconButton>
                 </Grid>
+                <Grid item lg={10} sm={10}>
+                    <Typography className={classes.title}>Cart Information</Typography>
+                </Grid>
+
                 {cartItems.map((item: any) => (
-                    <React.Fragment key ={item.id} >
+                    <React.Fragment key={item.id} >
                         <CartItem key={item.id} id={item.id} item={item} />
                     </React.Fragment>
                 ))}
                 <Grid item lg={12} sm={12}>
-                    <hr/>
-                <div style={{ width:"100%", display: 'grid', gridTemplateColumns: '4fr  1fr 1fr' }}>
-                    <div>
-                        <div>Total</div>
+                    <hr />
+                    <div style={{ width: "100%", display: 'grid', gridTemplateColumns: '4fr  1fr 1fr' }}>
+                        <div>
+                            <div>Total</div>
+                        </div>
+                        <div>$ {totalPrice}</div>
+                        <div></div>
                     </div>
-                    <div>$ {totalPrice}</div>
-                    <div></div>
-                </div>
                 </Grid>
                 <Grid container>
-                
+
                 </Grid>
             </Grid>
             <Grid item lg={12} sm={12}>
-                <Button onClick ={()=>alert("Not Implemented")}className={classes.checkOut}>Check-Out</Button>
+                <Button onClick={() => alert("Not Implemented")} className={classes.checkOut}>Check-Out</Button>
             </Grid>
         </div>);
 
